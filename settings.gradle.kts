@@ -24,4 +24,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Pals UI"
 include(":app")
- 
+include(":components:animated_text")
