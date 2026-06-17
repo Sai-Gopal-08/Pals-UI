@@ -77,25 +77,23 @@ fun ContextMenuCard(
     var shouldShowMenu by remember { mutableStateOf(false) }
     var longPressOffset by remember { mutableStateOf(Offset.Zero) }
 
+    // Resolve spec values with fallback to defaults — computed once per recomposition.
+    val resolvedShape = spec.cardShape ?: ContextMenuCardDefaults.cardShape
+    val resolvedColors = spec.cardColors ?: ContextMenuCardDefaults.cardColors()
+    val resolvedAnimationSpec = spec.cardHoverAnimationSpec ?: ContextMenuCardDefaults.cardHoverAnimationSpec
+    val resolvedHoveredElevation = spec.hoveredCardElevation ?: ContextMenuCardDefaults.hoveredCardElevation()
+    val resolvedDefaultElevation = spec.defaultCardElevation ?: ContextMenuCardDefaults.defaultCardElevation()
+
     val hoveredScale by animateFloatAsState(
         targetValue = if (shouldShowMenu) 1.02f else 1f,
         label = "hoveredScale",
-        animationSpec = spec.cardHoverAnimationSpec
-            ?: ContextMenuCardDefaults.cardHoverAnimationSpec
+        animationSpec = resolvedAnimationSpec
     )
 
     Card(
-        shape = spec.cardShape
-            ?: ContextMenuCardDefaults.cardShape,
-        colors = spec.cardColors
-            ?: ContextMenuCardDefaults.cardColors,
-        elevation = if (shouldShowMenu) {
-            spec.hoveredCardElevation
-                ?: ContextMenuCardDefaults.hoveredCardElevation
-        } else {
-            spec.defaultCardElevation
-                ?: ContextMenuCardDefaults.defaultCardElevation
-        },
+        shape = resolvedShape,
+        colors = resolvedColors,
+        elevation = if (shouldShowMenu) resolvedHoveredElevation else resolvedDefaultElevation,
         border = spec.cardBorderStroke,
         modifier = modifier
             .graphicsLayer {

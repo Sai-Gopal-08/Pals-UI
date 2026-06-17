@@ -205,6 +205,7 @@ components/context_menu_card/
 - [x] Flat structure used
 - [x] No generic model/common/data folders
 - [x] `kotlin.compose` plugin applied
+- [x] All composable parameters are stable types — UI recomposes only when inputs genuinely change
 - [ ] Public API reviewed for Maven publication
 - [ ] Component ready for Maven publication
 

@@ -11,21 +11,18 @@ import androidx.compose.ui.unit.dp
 /**
  * Default values and styling for [ContextMenuCard].
  *
- * This object provides sensible defaults for all customizable aspects of the card component.
- * These values are used when corresponding properties in [ContextMenuCardSpec] are null.
+ * Static values ([cardShape], [cardHoverAnimationSpec]) are plain singletons.
+ * Theme-dependent values ([cardColors], [hoveredCardElevation], [defaultCardElevation])
+ * are exposed as `@Composable` functions — the same pattern used by Material3's own
+ * [CardDefaults] — so they are only callable in composable scope and always reflect
+ * the current theme without relying on property getters.
  */
 object ContextMenuCardDefaults {
+
     /**
      * Default card shape with 16dp rounded corners.
      */
     val cardShape = RoundedCornerShape(16.dp)
-
-    /**
-     * Default card colors using Material3 theme colors.
-     */
-    val cardColors: CardColors
-        @Composable
-        get() = CardDefaults.cardColors()
 
     /**
      * Default animation specification for the hover/scale effect.
@@ -34,23 +31,37 @@ object ContextMenuCardDefaults {
     val cardHoverAnimationSpec = tween<Float>(durationMillis = 250)
 
     /**
-     * Elevation applied when the contextual menu is visible (hovered state).
-     * Elevated to 8dp to visually lift the card above other content.
+     * Default card colors resolved from the current Material3 theme.
+     *
+     * Exposed as a `@Composable` function (not a property getter) so it is only
+     * callable in composable scope and is consistent with how [CardDefaults.cardColors]
+     * itself is exposed. [CardColors] is `@Immutable` — equal instances across
+     * recompositions do not cause unnecessary downstream recompositions.
      */
-    val hoveredCardElevation: CardElevation
-        @Composable
-        get() = CardDefaults.elevatedCardElevation(
-            defaultElevation = 8.dp
-        )
+    @Composable
+    fun cardColors(): CardColors = CardDefaults.cardColors()
 
     /**
-     * Elevation applied when the card is in its default state (menu not visible).
-     * Set to 2dp for subtle depth.
+     * Default elevation when the contextual menu is visible — 8dp.
+     *
+     * Exposed as a `@Composable` function (not a property getter) so it is only
+     * callable in composable scope. [CardElevation] is `@Immutable` — equal instances
+     * across recompositions do not cause unnecessary downstream recompositions.
      */
-    val defaultCardElevation: CardElevation
-        @Composable
-        get() = CardDefaults.cardElevation(
-            defaultElevation = 2.dp
-        )
-}
+    @Composable
+    fun hoveredCardElevation(): CardElevation = CardDefaults.elevatedCardElevation(
+        defaultElevation = 8.dp
+    )
 
+    /**
+     * Default elevation when the card is in its resting state — 2dp.
+     *
+     * Exposed as a `@Composable` function (not a property getter) so it is only
+     * callable in composable scope. [CardElevation] is `@Immutable` — equal instances
+     * across recompositions do not cause unnecessary downstream recompositions.
+     */
+    @Composable
+    fun defaultCardElevation(): CardElevation = CardDefaults.cardElevation(
+        defaultElevation = 2.dp
+    )
+}

@@ -194,6 +194,7 @@ components/animated_text/
 - [x] No State needed (state is managed internally)
 - [x] No Callbacks needed
 - [x] No unnecessary recompositions
+- [x] All composable parameters are stable types — UI recomposes only when inputs genuinely change
 - [x] `@Stable` / `@Immutable` annotations reviewed
 - [x] No avoidable allocations during recomposition
 - [x] Flat structure used

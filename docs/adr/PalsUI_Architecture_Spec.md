@@ -382,6 +382,7 @@ Before publishing a new reusable:
 
 ## Compose Performance
 
+- [ ] All composable parameters are stable types — UI recomposes only when inputs genuinely change
 - [ ] No unnecessary recompositions
 - [ ] Stable/Immutable annotations reviewed
 - [ ] No avoidable allocations during recomposition
