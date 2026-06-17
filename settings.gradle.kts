@@ -26,3 +26,4 @@ rootProject.name = "Pals UI"
 include(":app")
 include(":components:animated_text")
 include(":components:context_menu_card")
+include(":components:flexible_icon")
