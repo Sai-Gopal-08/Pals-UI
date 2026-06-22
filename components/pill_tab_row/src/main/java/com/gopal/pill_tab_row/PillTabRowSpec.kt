@@ -3,7 +3,6 @@ package com.gopal.pill_tab_row
 import androidx.compose.animation.core.AnimationSpec
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 
