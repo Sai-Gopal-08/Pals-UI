@@ -1,10 +1,15 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.compose)
+    `maven-publish`
 }
 
 android {
     namespace = "com.gopal.stage_indicator"
+
+    publishing {
+        singleVariant("release")
+    }
     compileSdk {
         version = release(36) {
             minorApiLevel = 1
