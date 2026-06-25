@@ -356,12 +356,15 @@ Before publishing a new reusable:
 - [ ] README exists
 - [ ] Component documentation added to `docs/components/`
 - [ ] Sample/demo exists in showcase app
+- [ ] `build.gradle.kts` includes `maven-publish`, `singleVariant("release")`, and `afterEvaluate` publishing blocks for JitPack compatibility
 
 ## API Design
 
 - [ ] Public API is minimal
 - [ ] Implementation details are hidden
 - [ ] Naming follows library conventions
+- [ ] Composable accepts a `Modifier` as the first optional parameter to allow external layout control
+- [ ] Public API includes KDoc documentation for Spec and State properties
 
 ## Spec
 
@@ -386,6 +389,13 @@ Before publishing a new reusable:
 - [ ] No unnecessary recompositions
 - [ ] Stable/Immutable annotations reviewed
 - [ ] No avoidable allocations during recomposition
+- [ ] No heavy computation or expensive logic directly in the Composable body (use `remember` or `derivedStateOf`)
+
+## Design & Tooling
+
+- [ ] Component uses `MaterialTheme` tokens (colors/typography); no hardcoded values unless specified in Spec
+- [ ] Component provides proper Accessibility support (Content Descriptions, Semantics for interactive elements)
+- [ ] At least one `@Preview` exists to verify the component in the IDE design surface
 
 ## Structure
 
