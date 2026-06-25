@@ -59,3 +59,13 @@ dependencies {
 kotlin {
     jvmToolchain(11)
 }
+
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("release") {
+                from(components["release"])
+            }
+        }
+    }
+}
